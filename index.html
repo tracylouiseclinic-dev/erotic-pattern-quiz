@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What Drives Your Desire? | Tracy Louise</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9FHMEKBMF"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Y9FHMEKBMF');</script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body { background: #FAF7F4; }
@@ -34,8 +32,6 @@
     .option-btn.selected .opt-letter { background: #B5864A; color: #fff; border-color: #B5864A; }
     .opt-letter { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #C8B89A; background: transparent; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #B5864A; flex-shrink: 0; transition: all 0.15s; }
     .opt-text { flex: 1; line-height: 1.4; }
-
-    /* EMAIL CAPTURE */
     .capture-wrap { text-align: center; margin-bottom: 32px; }
     .capture-emoji { font-size: 48px; margin-bottom: 16px; }
     .capture-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 400; color: #1C1C1C; line-height: 1.2; margin-bottom: 12px; }
@@ -49,8 +45,6 @@
     .form-group input::placeholder { color: #BBB; }
     .privacy-note { font-size: 11px; color: #aaa; text-align: center; margin-top: 12px; line-height: 1.6; }
     .skip-link { display: block; text-align: center; margin-top: 16px; font-size: 11px; color: #bbb; cursor: pointer; text-decoration: underline; }
-
-    /* RESULTS */
     .result-header { text-align: center; margin-bottom: 32px; }
     .result-emoji { font-size: 52px; margin-bottom: 16px; }
     .result-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #B5864A; font-weight: 500; margin-bottom: 10px; }
@@ -78,7 +72,6 @@
 </head>
 <body>
 
-<!-- INTRO -->
 <div id="screen-intro" class="screen active">
   <span class="brand">Tracy Louise</span>
   <h1 class="intro-title">What Drives<br><em>Your Desire?</em></h1>
@@ -92,7 +85,6 @@
   <div class="footer">© 2026 Tracy Louise · <a href="https://tracylouise.com.au" target="_blank">tracylouise.com.au</a></div>
 </div>
 
-<!-- QUIZ -->
 <div id="screen-quiz" class="screen">
   <div class="quiz-meta">
     <span class="quiz-label">Question</span>
@@ -104,7 +96,6 @@
   <div class="options" id="optionsContainer"></div>
 </div>
 
-<!-- EMAIL CAPTURE -->
 <div id="screen-capture" class="screen">
   <div class="capture-wrap">
     <div class="capture-emoji" id="captureEmoji">✨</div>
@@ -116,13 +107,12 @@
     <div class="form-group"><input type="text" id="inputLastName" placeholder="Last name" autocomplete="family-name" /></div>
   </div>
   <div class="form-group"><input type="email" id="inputEmail" placeholder="Email address" autocomplete="email" /></div>
-  <button class="btn-gold" id="btnReveal">Reveal My Pattern</button>
-  <p class="privacy-note">Your details are private. No spam, ever. Unsubscribe anytime.</p>
+  <button class="btn-gold" id="btnSubmit">Reveal My Pattern</button>
+  <p class="privacy-note">Your privacy is sacred. No spam, ever. Unsubscribe anytime.</p>
   <span class="skip-link" id="btnSkip">Skip — just show me my result</span>
 </div>
 
-<!-- RESULTS -->
-<div id="screen-results" class="screen">
+<div id="screen-result" class="screen">
   <div class="result-header">
     <div class="result-emoji" id="resultEmoji"></div>
     <p class="result-label">Your Erotic Pattern</p>
@@ -130,207 +120,173 @@
     <p class="result-snippet" id="resultSnippet"></p>
   </div>
   <div class="scorecard">
-    <h3>Your Pattern Profile</h3>
+    <h3>Your Pattern Breakdown</h3>
     <div id="scoreBars"></div>
   </div>
-  <div class="upsell-card">
-    <div class="badge" id="upsellBadge">Go Deeper</div>
+  <div class="upsell-card" id="upsellCard">
+    <span class="badge" id="upsellBadge">Your Pattern Report</span>
     <h3 id="upsellTitle"></h3>
     <p id="upsellDesc"></p>
-    <button class="btn-upsell btn-upsell-gold" id="upsellBtn1"></button>
-    <button class="btn-upsell btn-upsell-dark" id="upsellBtn2"></button>
+    <button class="btn-upsell btn-upsell-gold" id="btnSingle">Single Pattern Report — A$15.99</button>
+    <button class="btn-upsell btn-upsell-dark" id="btnComplete">Complete Report (All 4) — A$29.99</button>
   </div>
-  <button class="btn-retake" id="btnRetake">Retake the Quiz</button>
+  <button class="btn-retake" id="btnRetake">Retake Quiz</button>
   <div class="footer">© 2026 Tracy Louise · <a href="https://tracylouise.com.au" target="_blank">tracylouise.com.au</a></div>
 </div>
 
 <script>
-var QUESTIONS = [
-  { text: "What creates the strongest sense of turn-on for you?", opts: ["The build-up before anything happens","Knowing something feels a bit forbidden","Feeling in control or giving it up completely","The tension of wanting it... but hesitating"], scores: ["L","T","P","A"] },
-  { text: "In your most memorable erotic experiences, what made them stand out?", opts: ["The slow anticipation and longing","Something felt slightly wrong or transgressive","A clear power dynamic — who was in charge","The push-pull of yes and no"], scores: ["L","T","P","A"] },
-  { text: "Which fantasy theme resonates most with you?", opts: ["Being deeply desired and waited for","Crossing a line you're not supposed to","Complete dominance or complete surrender","Seduction that's never quite resolved"], scores: ["L","T","P","A"] },
-  { text: "What feeling do you most want from a sexual encounter?", opts: ["To be utterly craved and yearned for","A secret thrill — like you're breaking a rule","The intensity of power exchanged","The ache of almost but not quite"], scores: ["L","T","P","A"] },
-  { text: "Which statement feels most true about your desire?", opts: ["I'm most turned on when someone wants me desperately","Forbidden things feel more exciting","Knowing who's in charge makes everything hotter","Unresolved tension is the most erotic thing"], scores: ["L","T","P","A"] },
-  { text: "When you imagine the lead-up to sex, what matters most?", opts: ["Long, charged anticipation","A sense of naughtiness or taboo","Negotiating or feeling power shift","Uncertainty about whether it will happen"], scores: ["L","T","P","A"] },
-  { text: "What kind of erotic story would you most likely read?", opts: ["Slow burn — longing, waiting, finally coming together","Something edgy or transgressive","Dominance and submission, power and control","Emotional tension — will they or won't they"], scores: ["L","T","P","A"] },
-  { text: "How do you feel about being denied pleasure temporarily?", opts: ["It makes the eventual release much more intense","It feels like a delicious kind of rule-breaking","It's about who holds the power to grant or withhold","It feeds that aching, unresolved feeling I love"], scores: ["L","T","P","A"] },
-  { text: "Which best describes your relationship with desire?", opts: ["I want to be the object of intense longing","I'm drawn to what feels illicit or slightly taboo","I want to claim or be claimed — power feels central","I live in the tension between wanting and holding back"], scores: ["L","T","P","A"] },
-  { text: "What tends to make sex feel more erotic to you?", opts: ["Knowing the other person has been thinking about me all day","A sense that we're doing something we shouldn't","A moment where power clearly shifts between us","Restraint — emotional or physical"], scores: ["L","T","P","A"] },
-  { text: "Your ideal erotic scenario would involve:", opts: ["Being pursued and finally caught","Something secretly thrilling","A power exchange — giving or receiving control","Exquisite restraint and slow release"], scores: ["L","T","P","A"] },
-  { text: "Which word excites you most in an erotic context?", opts: ["Longing","Forbidden","Command","Surrender... eventually"], scores: ["L","T","P","A"] },
-  { text: "How important is emotional tension to your arousal?", opts: ["Essential — desire without longing feels flat","It's the taboo, not the emotion, that does it for me","It's the power beneath the emotion that matters","Tension is everything — resolution almost disappoints me"], scores: ["L","T","P","A"] },
-  { text: "When desire is building, what do you most want the other person to do?", opts: ["Make me wait — show me how much they want me","Suggest something a little forbidden","Take charge or yield completely","Stay just out of reach"], scores: ["L","T","P","A"] },
-  { text: "What dampens your arousal most quickly?", opts: ["Feeling unwanted or overlooked","Everything feeling too safe and predictable","Loss of the power dynamic","Too much resolution — no more tension"], scores: ["L","T","P","A"] },
-  { text: "Which phrase resonates most with you?", opts: ["I've been thinking about you all day","We really shouldn't be doing this","You'll do exactly what I say","Not yet..."], scores: ["L","T","P","A"] },
-  { text: "Your erotic imagination is most activated by:", opts: ["Someone wanting you desperately from afar","The excitement of something transgressive","Clear power — dominance, submission, control","Unfinished business and unmet desire"], scores: ["L","T","P","A"] },
-  { text: "How do you feel about erotic rules and limits?", opts: ["They create delicious anticipation when broken slowly","Breaking them is the point","They define who holds power","They exist to be stretched, never quite crossed"], scores: ["L","T","P","A"] },
-  { text: "Which dynamic appeals to you most?", opts: ["The one who is desperately desired","The one crossing forbidden lines","The one who commands — or obeys completely","The one always on the edge of giving in"], scores: ["L","T","P","A"] },
-  { text: "What do you most want your erotic life to feel like?", opts: ["A great longing, finally answered","Thrillingly wrong in the best way","Powerfully charged — someone in control","A slow, exquisite ache"], scores: ["L","T","P","A"] }
+const QUESTIONS = [
+  { text: "When I imagine a deeply satisfying sexual experience, the feeling I'm most drawn to is…", opts: ["A sense of longing or anticipation beforehand", "The thrill of crossing a boundary or rule", "Feeling completely in control or surrendering control", "Overcoming tension or conflict to reach connection"] },
+  { text: "The fantasy scenarios that excite me most often involve…", opts: ["Waiting, yearning, or being desired from afar", "Something forbidden, taboo, or slightly dangerous", "A clear power dynamic — dominance or submission", "Emotional obstacles that make the connection feel earned"] },
+  { text: "In real life, I find that desire feels strongest when…", opts: ["I can't have something — or someone — right away", "There's an edge of risk or breaking the rules", "I feel a strong sense of authority or surrender", "There's tension that finally gets released"] },
+  { text: "If I were writing an erotic story, the central theme would be…", opts: ["Slow-burn longing and the moment it finally breaks", "A secret affair or forbidden encounter", "One person commanding, another yielding completely", "Two people overcoming conflict to finally be together"] },
+  { text: "The emotional quality I most associate with peak arousal is…", opts: ["Ache — a beautiful, almost painful wanting", "Transgression — the rush of doing what's 'not allowed'", "Power — either wielding it or releasing it", "Relief — tension breaking into bliss"] },
+  { text: "When I think about desire in my life, I feel most alive when…", opts: ["I'm in the wanting phase — not yet having", "I'm doing something that feels edgy or daring", "I feel a strong sense of control or complete surrender", "I've finally broken through a wall with someone"] },
+  { text: "The kind of lover I'm most drawn to is someone who…", opts: ["Pursues me slowly, makes me wait and ache", "Has a hint of danger, unpredictability, or forbidden quality", "Knows exactly how to take charge — or yield completely", "Has depth and complexity — maybe even some resistance to overcome"] },
+  { text: "In my imagination, the most powerful erotic charge comes from…", opts: ["Distance and delayed gratification", "Violating a rule, norm, or expectation", "The structure of who leads and who follows", "Conflict transforming into deep connection"] },
+  { text: "If desire had a texture for me, it would feel like…", opts: ["Tension stretched to the point of trembling", "A sharp, electric edge — like touching a live wire", "Gravity — an inevitable pull toward dominance or surrender", "A dam breaking — pressure finally released"] },
+  { text: "The thing that can instantly cool my desire is…", opts: ["When something happens too easily, with no build-up", "When everything feels too safe, predictable, or approved", "When the power dynamic feels unclear or ignored", "When conflict is avoided instead of worked through"] },
+  { text: "In my most private fantasies, I am most often…", opts: ["Longing for someone — or being deeply longed for", "Breaking a rule, crossing a line, or being 'bad'", "In command — or completely under someone else's command", "Fighting through tension to reach ecstasy"] },
+  { text: "The part of a sexual encounter I look forward to most is…", opts: ["The lead-up — the hints, glances, and slow burn", "The moment something forbidden becomes real", "The moment power shifts or becomes explicit", "The breakthrough — when all resistance melts away"] },
+  { text: "When I reflect on my most memorable erotic experiences, they share…", opts: ["A quality of longing, distance, or yearning finally fulfilled", "An element of risk, secrecy, or transgression", "A clear sense of who was in charge", "An emotional obstacle that made the intimacy sweeter"] },
+  { text: "The phrase that most resonates with my inner erotic world is…", opts: ['"I want what I can't quite have"', '"I want what I'm not supposed to have"', '"I want to command — or be commanded"', '"I want what feels almost impossible to reach"'] },
+  { text: "My desire tends to be activated by…", opts: ["Absence, mystery, or emotional unavailability", "Transgression, secrecy, or breaking norms", "Hierarchy, authority, or power exchange", "Emotional intensity, conflict, or the drama of connection"] },
+  { text: "When someone I'm attracted to plays 'hard to get', I feel…", opts: ["Intoxicated — it deepens my desire considerably", "Intrigued — especially if there's a hint of forbidden", "Challenged — I want to assert or feel their dominance", "Frustrated — but in a way that makes me want to break through"] },
+  { text: "The relationship between love and eroticism for me is…", opts: ["Eroticism lives in longing — love makes it bittersweet", "Eroticism lives at the edge of what's allowed — love is the alibi", "Eroticism lives in power — love is where I'm most vulnerable", "Eroticism lives in overcoming — love is the prize on the other side"] },
+  { text: "When I think about what makes sex feel truly alive, it's…", opts: ["The anticipation — the slow build that makes me ache", "The transgression — crossing into territory that feels illicit", "The power — feeling it flow between two people", "The breakthrough — when all the obstacles finally fall away"] },
+  { text: "My relationship to fantasy is…", opts: ["Rich with longing, distance, and yearning", "Full of taboo, secrecy, and the thrill of transgression", "Structured around power — who controls, who yields", "Driven by emotional conflict and its resolution"] },
+  { text: "If I could give my erotic life a name, it would be…", opts: ["The Art of Longing", "The Thrill of the Forbidden", "The Dance of Power", "The Triumph Over Resistance"] }
 ];
 
-var PATTERNS = {
-  L: { name: "Longing & Anticipation", emoji: "🌙", snippet: "You are most aroused by the space between wanting and having. Desire, for you, is built in the waiting — in being deeply craved, in the slow burn of anticipation. The yearning itself is erotic.", full: "Your erotic pattern is rooted in the profound pleasure of longing. You come alive in the tension between desire and fulfilment — the ache of wanting, of being wanted. Anticipation is not the prelude to pleasure for you; it is the pleasure." },
-  T: { name: "Violating Prohibitions", emoji: "🔥", snippet: "You're drawn to what feels illicit, transgressive, or slightly forbidden. The erotic charge for you comes from crossing lines — real or imagined. The shouldn't is what makes it electric.", full: "Your erotic pattern centres on the thrill of transgression. You are most alive erotically when something feels edgy, forbidden, or slightly illicit. You're wired to find arousal in the space where rules bend and limits are tested." },
-  P: { name: "Searching for Power", emoji: "⚡", snippet: "Power dynamics are central to your desire. Whether you prefer to lead or to surrender, the erotic charge comes from the clarity of who holds control — and the intensity of giving or receiving it.", full: "Your erotic pattern is built around power. The explicit negotiation of who is in charge — who commands, who yields — is deeply arousing to you. This can express as dominance, submission, or fluid exchange. What matters is that the power is felt." },
-  A: { name: "Overcoming Ambivalence", emoji: "🌊", snippet: "You live erotically in the tension of almost. The push-pull of yes and no, the unresolved ache, the restraint that never quite breaks — this is where your desire lives. Resolution almost disappoints you.", full: "Your erotic pattern thrives in ambivalence — the delicious uncertainty of desire that is never quite resolved. You are most aroused when tension is held, not released. The edge of surrender, the moment before yes — this is your erotic home." }
+const PATTERNS = {
+  L: { name: "Longing & Anticipation", emoji: "🌙", color: "#7B68EE",
+    snippet: "Your erotic world is built on the exquisite ache of wanting. Distance, mystery, and the slow build of desire are your fuel — you're most alive in the space between yearning and having.",
+    upsellTitle: "The Art of Longing", upsellDesc: "Your report explores how anticipation shapes your desire, why absence can feel more erotic than presence, and how to consciously work with this pattern in your relationships and your body." },
+  T: { name: "Violating Prohibitions", emoji: "🔥", color: "#E8634A",
+    snippet: "You are aroused by edges — the forbidden, the taboo, the rule that begs to be broken. Your desire lives where things feel slightly dangerous, illicit, or outside what's sanctioned.",
+    upsellTitle: "The Thrill of the Forbidden", upsellDesc: "Your report unpacks the psychology of transgression, how to explore your edges safely and consciously, and what this pattern reveals about your relationship with authority, shame, and freedom." },
+  P: { name: "Searching for Power", emoji: "⚡", color: "#B5864A",
+    snippet: "Power is the current that runs through your erotic life — whether you're drawn to holding it, yielding it, or watching it exchange between people. Structure, hierarchy, and surrender are deeply meaningful to you.",
+    upsellTitle: "The Dance of Power", upsellDesc: "Your report maps your unique relationship to power in erotic contexts, how dominance and submission show up for you, and how to navigate power dynamics with awareness, consent, and depth." },
+  A: { name: "Overcoming Ambivalence", emoji: "💎", color: "#5B8DB8",
+    snippet: "For you, desire is forged through friction. Emotional complexity, obstacles, and the tension of almost-but-not-yet are what make intimacy feel real. The triumph of connection is your deepest erotic fuel.",
+    upsellTitle: "The Triumph Over Resistance", upsellDesc: "Your report explores how emotional intensity and conflict shape your desire, why you may be drawn to complicated dynamics, and how to channel this pattern toward deep, conscious intimacy." }
 };
 
-var scores = { L: 0, T: 0, P: 0, A: 0 };
-var current = 0;
-var busy = false;
-var finalResult = null;
+const KEYS = ['L','T','P','A'];
+let scores = {L:0, T:0, P:0, A:0};
+let currentQ = 0;
+let capturedData = {};
 
 function showScreen(id) {
-  var all = document.querySelectorAll('.screen');
-  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
-  document.getElementById('screen-' + id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function startQuiz() {
-  scores = { L: 0, T: 0, P: 0, A: 0 };
-  current = 0;
-  busy = false;
-  finalResult = null;
-  showScreen('quiz');
-  renderQuestion();
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
 }
 
 function renderQuestion() {
-  busy = false;
-  var q = QUESTIONS[current];
-  document.getElementById('qCount').textContent = (current + 1) + ' / 20';
-  document.getElementById('qLabel').textContent = 'QUESTION ' + (current + 1);
+  const q = QUESTIONS[currentQ];
+  document.getElementById('qCount').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('qLabel').textContent = 'QUESTION ' + (currentQ+1);
   document.getElementById('qText').textContent = q.text;
-  document.getElementById('progressFill').style.width = Math.round((current + 1) / 20 * 100) + '%';
-  var letters = ['A','B','C','D'];
-  var container = document.getElementById('optionsContainer');
+  document.getElementById('progressFill').style.width = ((currentQ+1)/QUESTIONS.length*100) + '%';
+  const container = document.getElementById('optionsContainer');
   container.innerHTML = '';
-  for (var i = 0; i < q.opts.length; i++) {
-    var btn = document.createElement('button');
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
     btn.className = 'option-btn';
-    btn.innerHTML = '<span class="opt-letter">' + letters[i] + '</span><span class="opt-text">' + q.opts[i] + '</span>';
-    btn.setAttribute('data-score', q.scores[i]);
+    btn.innerHTML = '<span class="opt-letter">'+letters[i]+'</span><span class="opt-text">'+opt+'</span>';
+    btn.onclick = function() {
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        scores[KEYS[i]]++;
+        currentQ++;
+        if (currentQ < QUESTIONS.length) { renderQuestion(); }
+        else { showCapture(); }
+      }, 350);
+    };
     container.appendChild(btn);
-  }
-  container.onclick = function(e) {
-    if (busy) return;
-    var btn = e.target.closest('.option-btn');
-    if (!btn) return;
-    busy = true;
-    var all = container.querySelectorAll('.option-btn');
-    for (var i = 0; i < all.length; i++) all[i].classList.remove('selected');
-    btn.classList.add('selected');
-    scores[btn.getAttribute('data-score')]++;
-    setTimeout(function() {
-      current++;
-      if (current >= QUESTIONS.length) {
-        computeResult();
-        showCaptureScreen();
-      } else {
-        renderQuestion();
-      }
-    }, 400);
-  };
+  });
 }
 
-function computeResult() {
-  var entries = [['L',scores.L],['T',scores.T],['P',scores.P],['A',scores.A]];
-  entries.sort(function(a,b){ return b[1]-a[1]; });
-  var top = entries[0], second = entries[1];
-  finalResult = {
-    entries: entries,
-    top: top,
-    isBlend: (top[1] - second[1]) <= 3,
-    dominant: PATTERNS[top[0]]
-  };
+function showCapture() {
+  const dom = getDominant();
+  const p = PATTERNS[dom];
+  document.getElementById('captureEmoji').textContent = p.emoji;
+  document.getElementById('capturePatternName').textContent = p.name;
+  showScreen('screen-capture');
 }
 
-function showCaptureScreen() {
-  document.getElementById('captureEmoji').textContent = finalResult.dominant.emoji;
-  document.getElementById('capturePatternName').textContent = finalResult.dominant.name;
-  showScreen('capture');
+function getDominant() {
+  return KEYS.reduce((a,b) => scores[a] >= scores[b] ? a : b);
 }
 
-function showResults() {
-  var r = finalResult;
-  document.getElementById('resultEmoji').textContent = r.dominant.emoji;
-  document.getElementById('resultTitle').textContent = r.dominant.name;
-  document.getElementById('resultSnippet').textContent = r.dominant.snippet;
-
-  var names = { L: 'Longing & Anticipation', T: 'Violating Prohibitions', P: 'Searching for Power', A: 'Overcoming Ambivalence' };
-  var barsEl = document.getElementById('scoreBars');
-  barsEl.innerHTML = '';
-  for (var i = 0; i < r.entries.length; i++) {
-    var pct = Math.round(r.entries[i][1] / 20 * 100);
-    var div = document.createElement('div');
-    div.className = 'score-row';
-    div.innerHTML = '<div class="score-meta"><span class="score-name">' + names[r.entries[i][0]] + '</span><span class="score-pct">' + pct + '%</span></div><div class="score-track"><div class="score-bar" style="width:' + pct + '%"></div></div>';
-    barsEl.appendChild(div);
-  }
-
-  var b1 = document.getElementById('upsellBtn1');
-  var b2 = document.getElementById('upsellBtn2');
-  if (r.isBlend) {
-    document.getElementById('upsellBadge').textContent = 'Recommended for Blend Profiles';
-    document.getElementById('upsellTitle').textContent = 'Your Complete Erotic Blueprint';
-    document.getElementById('upsellDesc').textContent = 'You have a blend profile — two patterns are almost equally active. The Complete Report explores all four codes and how they interact in your unique erotic makeup.';
-    b1.textContent = 'Get Complete Report — $29.99 AUD';
-    b2.textContent = 'Single Pattern Deep Dive — $15.99 AUD';
-    b1.onclick = function(){ window.open('https://buy.stripe.com/28EdR8cIu3jA1ALbHyawo01','_blank'); };
-    b2.onclick = function(){ window.open('https://buy.stripe.com/4gMdR84bYaM2enxh1Sawo00','_blank'); };
-  } else {
-    document.getElementById('upsellBadge').textContent = 'Go Deeper';
-    document.getElementById('upsellTitle').textContent = r.dominant.name + ' — Deep Dive Report';
-    document.getElementById('upsellDesc').textContent = r.dominant.full + ' Unlock your full personalised report to explore what this means for your relationships and erotic growth.';
-    b1.textContent = 'Unlock Full Report — $15.99 AUD';
-    b2.textContent = 'Complete Report (All 4 Patterns) — $29.99 AUD';
-    b1.onclick = function(){ window.open('https://buy.stripe.com/4gMdR84bYaM2enxh1Sawo00','_blank'); };
-    b2.onclick = function(){ window.open('https://buy.stripe.com/28EdR8cIu3jA1ALbHyawo01','_blank'); };
-  }
-
-  if (typeof gtag !== 'undefined') gtag('event','quiz_complete',{ dominant_pattern: r.top[0], is_blend: r.isBlend });
-  showScreen('results');
+function showResult() {
+  const dom = getDominant();
+  const p = PATTERNS[dom];
+  document.getElementById('resultEmoji').textContent = p.emoji;
+  document.getElementById('resultTitle').textContent = p.name;
+  document.getElementById('resultSnippet').textContent = p.snippet;
+  const total = KEYS.reduce((s,k) => s+scores[k], 0);
+  const bars = document.getElementById('scoreBars');
+  bars.innerHTML = '';
+  KEYS.forEach(k => {
+    const pct = total ? Math.round(scores[k]/total*100) : 0;
+    bars.innerHTML += '<div class="score-row"><div class="score-meta"><span class="score-name">'+PATTERNS[k].name+'</span><span class="score-pct">'+pct+'%</span></div><div class="score-track"><div class="score-bar" style="width:'+pct+'%"></div></div></div>';
+  });
+  document.getElementById('upsellTitle').textContent = p.upsellTitle;
+  document.getElementById('upsellDesc').textContent = p.upsellDesc;
+  const b1 = document.getElementById('btnSingle');
+  const b2 = document.getElementById('btnComplete');
+  b1.onclick = function(){ window.open('https://buy.stripe.com/4gMdR84bYaM2enxh1Sawo00','_blank'); };
+  b2.onclick = function(){ window.open('https://buy.stripe.com/28EdR8cIu3jA1ALbHyawo01','_blank'); };
+  showScreen('screen-result');
 }
 
-function submitLead(firstName, lastName, email) {
-  var scoresObj = { L: scores.L, T: scores.T, P: scores.P, A: scores.A };
-  fetch('https://superagent-56efc285.base44.app/functions/quizSubmit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      dominantPattern: finalResult.top[0],
-      isBlend: finalResult.isBlend,
-      scores: scoresObj
-    })
-  }).catch(function(e){ console.log('Submit error:', e); });
+async function submitLead(first, last, email) {
+  try {
+    const dom = getDominant();
+    const p = PATTERNS[dom];
+    const total = KEYS.reduce((s,k) => s+scores[k], 0);
+    const scoreData = {};
+    KEYS.forEach(k => { scoreData[k] = total ? Math.round(scores[k]/total*100) : 0; });
+    const isBlend = KEYS.filter(k => scores[k] >= scores[dom]-1).length > 1;
+    await fetch('https://base44.app/api/apps/6a3cf37e74f8f81e56efc285/functions/quizSubmit', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ first_name: first, last_name: last, email, dominant_pattern: dom, pattern_name: p.name, is_blend: isBlend, scores: scoreData })
+    });
+  } catch(e) { console.log('Submit error', e); }
 }
 
-document.getElementById('btnStart').onclick = startQuiz;
-document.getElementById('btnRetake').onclick = startQuiz;
-
-document.getElementById('btnReveal').onclick = function() {
-  var firstName = document.getElementById('inputFirstName').value.trim();
-  var email = document.getElementById('inputEmail').value.trim();
-  if (!firstName || !email) {
-    alert('Please enter your first name and email to reveal your pattern.');
-    return;
-  }
-  var emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailReg.test(email)) {
-    alert('Please enter a valid email address.');
-    return;
-  }
-  var lastName = document.getElementById('inputLastName').value.trim();
-  submitLead(firstName, lastName, email);
-  showResults();
+document.getElementById('btnStart').onclick = function() {
+  scores = {L:0,T:0,P:0,A:0};
+  currentQ = 0;
+  showScreen('screen-quiz');
+  renderQuestion();
 };
 
-document.getElementById('btnSkip').onclick = function() {
-  showResults();
+document.getElementById('btnSubmit').onclick = async function() {
+  const first = document.getElementById('inputFirstName').value.trim();
+  const last = document.getElementById('inputLastName').value.trim();
+  const email = document.getElementById('inputEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('inputEmail').style.borderColor = '#e55';
+    return;
+  }
+  this.textContent = 'Just a moment...';
+  this.disabled = true;
+  await submitLead(first, last, email);
+  showResult();
+};
+
+document.getElementById('btnSkip').onclick = function() { showResult(); };
+document.getElementById('btnRetake').onclick = function() {
+  scores = {L:0,T:0,P:0,A:0};
+  currentQ = 0;
+  showScreen('screen-intro');
 };
 </script>
 </body>
