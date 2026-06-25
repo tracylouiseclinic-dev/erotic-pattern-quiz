@@ -135,6 +135,7 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
 const QUESTIONS = [
   { text: "When I imagine a deeply satisfying sexual experience, the feeling I'm most drawn to is…", opts: ["A sense of longing or anticipation beforehand", "The thrill of crossing a boundary or rule", "Feeling completely in control or surrendering control", "Overcoming tension or conflict to reach connection"] },
   { text: "The fantasy scenarios that excite me most often involve…", opts: ["Waiting, yearning, or being desired from afar", "Something forbidden, taboo, or slightly dangerous", "A clear power dynamic — dominance or submission", "Emotional obstacles that make the connection feel earned"] },
@@ -288,6 +289,7 @@ document.getElementById('btnRetake').onclick = function() {
   currentQ = 0;
   showScreen('screen-intro');
 };
+});
 </script>
 </body>
 </html>
