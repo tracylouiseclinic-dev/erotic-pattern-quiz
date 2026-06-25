@@ -180,8 +180,14 @@ let currentQ = 0;
 let capturedData = {};
 
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  var allScreens = document.querySelectorAll('.screen');
+  allScreens.forEach(function(s) {
+    s.style.display = 'none';
+    s.classList.remove('active');
+  });
+  var target = document.getElementById(id);
+  target.style.display = 'block';
+  target.classList.add('active');
   window.scrollTo(0,0);
 }
 
